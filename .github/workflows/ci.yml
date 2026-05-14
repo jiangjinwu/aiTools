@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-extensions:
+    name: validate-extensions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate extension.yml files
+        shell: bash
+        run: |
+          errors=0
+          for dir in speckit-*/; do
+            name=$(basename "$dir")
+            yml="$dir/extension.yml"
+            if [ ! -f "$yml" ]; then
+              echo "::error::$name missing extension.yml"
+              errors=$((errors + 1))
+              continue
+            fi
+
+            # Check required fields
+            for field in id name version description; do
+              if ! grep -q "^  ${field}:" "$yml"; then
+                echo "::error::$name missing field '$field' in extension.yml"
+                errors=$((errors + 1))
+              fi
+            done
+
+            # Check referenced command files exist
+            if grep -q 'file:' "$yml"; then
+              while IFS= read -r file; do
+                filepath=$(echo "$file" | sed 's/.*file: *//' | tr -d '"')
+                if [ ! -f "$dir$filepath" ]; then
+                  echo "::error::$name references missing file: $filepath"
+                  errors=$((errors + 1))
+                fi
+              done < <(grep 'file:' "$yml")
+            fi
+
+            # Check config template exists
+            if grep -q 'template:' "$yml"; then
+              template=$(grep 'template:' "$yml" | sed 's/.*template: *//' | tr -d '"')
+              if [ ! -f "$dir$template" ]; then
+                echo "::error::$name references missing template: $template"
+                errors=$((errors + 1))
+              fi
+            fi
+
+            echo "✓ $name validated"
+          done
+
+          if [ $errors -gt 0 ]; then
+            echo "::error::$errors validation error(s) found"
+            exit 1
+          fi
+
+  shellcheck-scripts:
+    name: shellcheck-scripts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './speckit-mvnd-bugfix-loop/scripts'
+
+  package-test:
+    name: package-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Test packaging
+        shell: bash
+        run: |
+          for dir in speckit-*/; do
+            name=$(basename "$dir")
+            cd "$dir"
+            zip -r "/tmp/${name}.zip" .
+            cd ..
+            echo "✓ $name packaged successfully"
+            unzip -t "/tmp/${name}.zip" > /dev/null
+            echo "✓ $name zip is valid"
+          done
