@@ -7,7 +7,7 @@ scripts:
   sh: scripts/bash/sync-spec-status.sh
 ---
 
-# SpecKit mvnd Bugfix Loop — Build Fix
+# mvnd Bugfix Loop — Build Fix
 
 > **Type:** Extension command
 > **Skill origin:** mvnd-bugfix-loop (Claude Code Skill)

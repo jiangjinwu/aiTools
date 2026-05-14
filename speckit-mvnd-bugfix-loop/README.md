@@ -1,11 +1,11 @@
-# SpecKit mvnd Bugfix Loop
+# mvnd Bugfix Loop
 
 Bridges [mvnd-bugfix-loop](../../.claude/mvnd-bugfix-loop/SKILL.md) into the Spec Kit workflow for automatic build verification and fix reporting after implementation.
 
 ## Bridge Model
 
 ```text
-  [ Spec Kit Main Flow ]                              [ Extension Enhancement ]
+  [ Spec Kit Main Flow ]                         [ Extension Enhancement ]
 
  ┌───────────────────┐
  │ /speckit implement│ ─────> 1. Spec Kit executes implementation
@@ -13,15 +13,15 @@ Bridges [mvnd-bugfix-loop](../../.claude/mvnd-bugfix-loop/SKILL.md) into the Spe
            │                  (after_implement hook, optional)
            │
            ▼
- ┌─────────────────────────────┐
- │ /speckit-mvnd-bugfix-loop.fix │ ──> 1. Run mvnd verify
- └─────────┬───────────────────┘     2. If fail → enter fix loop (auto mode)
-           │                         3. Generate bug report in specs/{feature}/bugs/
-           │                         4. Sync **Status**: Verified in spec.md
+ ┌───────────────────────────┐
+ │ /speckit.mvnd-bugfix-loop.fix │ > 1. Run mvnd verify
+ └─────────┬─────────────────┘    2. If fail → enter fix loop (auto mode)
+           │                      3. Generate bug report in specs/{feature}/bugs/
+           │                      4. Sync **Status**: Verified in spec.md
            │
- ┌──────────────────────────────┐
- │ /speckit-mvnd-bugfix-loop.check │ > Diagnostics: verify mvnd + skill availability
- └──────────────────────────────┘
+ ┌─────────────────────────────┐
+ │ /speckit.mvnd-bugfix-loop.check │ > Diagnostics: verify mvnd + skill availability
+ └─────────────────────────────┘
 ```
 
 ## Features
@@ -34,20 +34,13 @@ Bridges [mvnd-bugfix-loop](../../.claude/mvnd-bugfix-loop/SKILL.md) into the Spe
 
 ## Installation
 
-Install from ZIP (Recommended)
-Install directly from the release asset:
-```bash
-specify extension add speckit-mvnd-bugfix-loop --from https://github.com/jiangjinwu/aiTools/releases/download/v1.0.0/speckit-mvnd-bugfix-loop.zip
-```
-
-
 ### Install from source (Development)
 
 ```bash
 cd source/spec-kit-extensions
-specify extension add --dev ./speckit-mvnd-bugfix-loop
-
+specify extension add --dev ./mvnd-bugfix-loop
 ```
+
 ### Prerequisites
 
 1. **mvnd** installed and on PATH ([installation guide](https://github.com/apache/maven-mvnd))
@@ -56,20 +49,20 @@ specify extension add --dev ./speckit-mvnd-bugfix-loop
 
 ### Verify installation
 
-Run `/speckit-mvnd-bugfix-loop.check` after installation.
+Run `/speckit.mvnd-bugfix-loop.check` after installation.
 
 ## Commands
 
 | Command | Type | Purpose |
 |---------|------|---------|
-| `/speckit-mvnd-bugfix-loop.fix` | Hookable | Run mvnd verification, fix loop if failures, generate bug report |
-| `/speckit-mvnd-bugfix-loop.check` | Standalone | Verify mvnd and skill availability |
+| `/speckit.mvnd-bugfix-loop.fix` | Hookable | Run mvnd verification, fix loop if failures, generate bug report |
+| `/speckit.mvnd-bugfix-loop.check` | Standalone | Verify mvnd and skill availability |
 
 ## Hook Integration
 
 | Hook | Command | Optional | Description |
 |------|---------|----------|-------------|
-| `after_implement` | `speckit-mvnd-bugfix-loop.fix` | Yes | Post-implementation build verification |
+| `after_implement` | `mvnd-bugfix-loop.fix` | Yes | Post-implementation build verification |
 
 ## Bug Type Mapping
 
@@ -84,9 +77,9 @@ Run `/speckit-mvnd-bugfix-loop.check` after installation.
 
 | Responsibility | Owner |
 |---------------|-------|
-| Build verification and fix loop | speckit-mvnd-bugfix-loop |
-| Bug report generation | speckit-mvnd-bugfix-loop |
-| spec.md status sync | speckit-mvnd-bugfix-loop |
+| Build verification and fix loop | mvnd-bugfix-loop |
+| Bug report generation | mvnd-bugfix-loop |
+| spec.md status sync | mvnd-bugfix-loop |
 | Specification creation and mutation | Spec Kit |
 | Task generation | Spec Kit |
 | TDD enforcement | Superpowers Bridge |

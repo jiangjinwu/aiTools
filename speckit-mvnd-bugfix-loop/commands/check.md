@@ -4,10 +4,10 @@ description: >
   tool are available.
 ---
 
-# SpecKit mvnd Bugfix Loop — Diagnostics
+# mvnd Bugfix Loop — Diagnostics
 
 > **Type:** Extension-native diagnostics command
-> **Invocation:** Manual (`/speckit-mvnd-bugfix-loop.check`)
+> **Invocation:** Manual (`/speckit.mvnd-bugfix-loop.check`)
 
 ---
 
@@ -47,7 +47,7 @@ Verify this extension is registered in `.specify/extensions/` or equivalent.
 ## Step 4 — Report
 
 ```text
-  speckit-mvnd-bugfix-loop Status:
+  mvnd-bugfix-loop Status:
   mvnd: [available|not found] — [version if available]
   skill: [found|not found] — [resolved path]
   extension: [registered|not registered]
@@ -58,9 +58,9 @@ Verify this extension is registered in `.specify/extensions/` or equivalent.
 If all checks pass:
 
 ```text
-  speckit-mvnd-bugfix-loop is ready. Available commands:
-  /speckit-mvnd-bugfix-loop.fix   — Run mvnd build verification and fix loop
-  /speckit-mvnd-bugfix-loop.check — This diagnostics command
+  mvnd-bugfix-loop is ready. Available commands:
+  /speckit.mvnd-bugfix-loop.fix   — Run mvnd build verification and fix loop
+  /speckit.mvnd-bugfix-loop.check — This diagnostics command
 ```
 
 If any check fails, list the specific issues and remediation steps.

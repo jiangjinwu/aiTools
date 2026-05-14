@@ -1,8 +1,8 @@
 schema_version: "1.0"
 
 extension:
-  id: speckit-mvnd-bugfix-loop
-  name: SpecKit mvnd Bugfix Loop
+  id: mvnd-bugfix-loop
+  name: mvnd Bugfix Loop
   version: 0.1.0
   description: "Bridges mvnd-bugfix-loop into Spec Kit workflow for automatic build verification and fix reporting."
   author: jjw-java
@@ -13,28 +13,28 @@ requires:
 
 provides:
   commands:
-    - name: speckit-mvnd-bugfix-loop.fix
+    - name: mvnd-bugfix-loop.fix
       file: commands/fix.md
       description: >
         Invoke mvnd-bugfix-loop skill to diagnose and fix build/test/startup
         failures. Generates bug report in specs/{feature}/bugs/ when SpecKit
         context is detected.
 
-    - name: speckit-mvnd-bugfix-loop.check
+    - name: mvnd-bugfix-loop.check
       file: commands/check.md
       description: >
         Diagnostics command. Verifies mvnd-bugfix-loop skill is installed and
-        reports bridge readiness.
+        reports extension readiness.
 
   config:
-    - name: speckit-mvnd-bugfix-loop-config.yml
-      template: speckit-mvnd-bugfix-loop-config.template.yml
-      description: "SpecKit mvnd Bugfix Loop configuration"
+    - name: mvnd-bugfix-loop-config.yml
+      template: mvnd-bugfix-loop-config.template.yml
+      description: "mvnd Bugfix Loop configuration"
       required: false
 
 hooks:
   after_implement:
-    command: speckit-mvnd-bugfix-loop.fix
+    command: mvnd-bugfix-loop.fix
     optional: true
     prompt: "Run mvnd build verification after implementation?"
     description: >

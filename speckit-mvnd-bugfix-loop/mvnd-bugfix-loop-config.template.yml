@@ -1,5 +1,5 @@
-# SpecKit mvnd Bugfix Loop Configuration Template
-# Copy to speckit-mvnd-bugfix-loop-config.yml and customize.
+# mvnd Bugfix Loop Configuration Template
+# Copy to mvnd-bugfix-loop-config.yml and customize.
 
 # mvnd command (default: mvnd)
 mvnd_command: mvnd
