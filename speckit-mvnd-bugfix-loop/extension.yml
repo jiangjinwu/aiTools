@@ -3,7 +3,7 @@ schema_version: "1.0"
 extension:
   id: mvnd-bugfix-loop
   name: mvnd Bugfix Loop
-  version: 0.1.0
+  version: 1.0.4
   description: "Bridges mvnd-bugfix-loop into Spec Kit workflow for automatic build verification and fix reporting."
   author: jjw-java
   license: MIT

@@ -37,7 +37,7 @@ Bridges [mvnd-bugfix-loop](../../.claude/mvnd-bugfix-loop/SKILL.md) into the Spe
 ### Install from release
 
 ```bash
-specify extension add mvnd-bugfix-loop --from https://github.com/jiangjinwu/aiTools/releases/latest/download/mvnd-bugfix-loop.zip
+specify extension add mvnd-bugfix-loop --from https://github.com/jiangjinwu/aiTools/releases/latest/download/speckit-mvnd-bugfix-loop.zip
 ```
 
 ### Install from source (Development)
