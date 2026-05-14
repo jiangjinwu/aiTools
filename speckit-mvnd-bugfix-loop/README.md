@@ -34,13 +34,20 @@ Bridges [mvnd-bugfix-loop](../../.claude/mvnd-bugfix-loop/SKILL.md) into the Spe
 
 ## Installation
 
+Install from ZIP (Recommended)
+Install directly from the release asset:
+```bash
+specify extension add speckit-mvnd-bugfix-loop --from https://github.com/jiangjinwu/aiTools/releases/download/v1.0.0/speckit-mvnd-bugfix-loop.zip
+```
+
+
 ### Install from source (Development)
 
 ```bash
 cd source/spec-kit-extensions
 specify extension add --dev ./speckit-mvnd-bugfix-loop
-```
 
+```
 ### Prerequisites
 
 1. **mvnd** installed and on PATH ([installation guide](https://github.com/apache/maven-mvnd))
